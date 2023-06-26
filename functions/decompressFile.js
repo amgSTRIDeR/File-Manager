@@ -4,11 +4,12 @@ import zlib from 'zlib';
 import path from 'path';
 import isFile from './isFile.js';
 
-export default async function compressFile(pathToFile, destinationPath) {
+export default async function decompressFile(pathToFile, destinationPath) {
   const destinationFilePath = path.resolve(
     destinationPath,
-    `${path.basename(pathToFile)}.br`
+    `${path.basename(pathToFile).slice(0, -3)}`
   );
+
   if (
     !fs.existsSync(pathToFile) ||
     !isFile(pathToFile) ||
@@ -22,12 +23,12 @@ export default async function compressFile(pathToFile, destinationPath) {
   const readStream = fs.createReadStream(pathToFile);
   const writeStream = fs.createWriteStream(destinationFilePath);
 
-  const brotliStream = zlib.createBrotliCompress();
+  const brotliStream = zlib.createBrotliDecompress();
 
   readStream.pipe(brotliStream).pipe(writeStream);
 
   writeStream.on('finish', () => {
-    showMessage('File compressed successfully', 'yellow');
+    showMessage('File decompressed successfully', 'yellow');
   });
 
   writeStream.on('error', (err) => {

@@ -16,6 +16,7 @@ import deleteFile from './functions/deleteFile.js';
 import osActions from './functions/osActions.js';
 import getHash from './functions/getHash.js';
 import compressFile from './functions/compressFile.js';
+import decompressFile from './functions/decompressFile.js';
 
 const userName = getUserName();
 let currentPath = os.homedir();
@@ -122,6 +123,14 @@ process.stdin.on('data', async (data) => {
         break;
       }
       await compressFile(firstArgPath, secondArgPath);
+      break;
+
+    case 'decompress':
+      if (!firstArg || !secondArg) {
+        showMessage('Invalid input', 'red');
+        break;
+      }
+      await decompressFile(firstArgPath, secondArgPath);
       break;
 
     case '.exit':
