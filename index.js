@@ -1,3 +1,6 @@
-import greetings from "./greetings.js";
+import getUserName from './functions/getUserName.js';
+import greetUser from './functions/greetUser.js';
 
-greetings();
+const userName = getUserName();
+
+greetUser(userName);
