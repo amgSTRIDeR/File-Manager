@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import colors from '../common/colors.js';
+import showMessage from './showMessage.js';
 import isDirectory from './isDirectory.js';
 
 export default function getDirectoryPath(dirPath, currentPath) {
@@ -14,6 +14,6 @@ export default function getDirectoryPath(dirPath, currentPath) {
     return relativePath;
   }
 
-  console.log(`${colors.red}Operation failed${colors.reset}\n`);
+  showMessage();
   return currentPath;
 }

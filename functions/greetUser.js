@@ -1,6 +1,6 @@
-import colors from '../common/colors.js';
+import showMessage from './showMessage.js';
 
 export default function greetUser(userName, currentPath) {
-  console.log(`\n${colors.cyan}Welcome to the File Manager, ${colors.yellow}${userName}${colors.cyan}!${colors.reset}`);
-  console.log(`${colors.green}You are currently in ${currentPath}${colors.reset}`);
+  showMessage(`Welcome to the File Manager, ${userName}!`, 'cyan');
+  showMessage(`You are currently in ${currentPath}`, 'green');
 }

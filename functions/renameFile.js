@@ -1,16 +1,16 @@
 import fs from 'fs';
-import colors from '../common/colors.js';
+import showMessage from './showMessage.js';
 
 export default async function createFile(oldPathToFile, newPathToFile) {
   if (!fs.existsSync(oldPathToFile) || fs.existsSync(newPathToFile)) {
-    console.log(`${colors.red}Operation failed${colors.reset}`);
+    showMessage();
     return;
   }
 
   try {
     await fs.promises.rename(oldPathToFile, newPathToFile);
-    console.log(`${colors.yellow}File renamed successfully${colors.reset}`);
+    showMessage('File renamed successfully', 'yellow');
   } catch (err) {
-    console.log(`${colors.red}Operation failed${colors.reset}`);
+    showMessage();
   }
 }

@@ -1,16 +1,16 @@
 import fs from 'fs';
-import colors from '../common/colors.js';
+import showMessage from './showMessage.js';
 
 export default async function createFile(pathToFile) {
   if (fs.existsSync(pathToFile)) {
-    console.log(`${colors.red}Operation failed${colors.reset}`);
+    showMessage();
     return;
   }
 
   try {
     await fs.promises.writeFile(pathToFile, '');
-    console.log(`${colors.yellow}File created successfully${colors.reset}`);
+    showMessage('File created successfully', 'yellow');
   } catch (err) {
-    console.log(`${colors.red}Operation failed${colors.reset}`);
+    showMessage();
   }
 }

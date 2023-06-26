@@ -1,10 +1,10 @@
 import isFile from './isFile.js';
 import fs from 'fs';
-import colors from '../common/colors.js';
+import showMessage from './showMessage.js';
 
 export default async function readSelectedFile(pathToFile) {
   if (!fs.existsSync(pathToFile) || !isFile(pathToFile)) {
-    console.log(`${colors.red}Operation failed${colors.reset}\n`);
+    showMessage();
     return;
   }
 

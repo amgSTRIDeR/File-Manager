@@ -1,7 +1,5 @@
-import colors from './common/colors.js';
 import getUserName from './functions/getUserName.js';
 import greetUser from './functions/greetUser.js';
-import sayGoodbye from './functions/sayGoodbye.js';
 import os from 'os';
 import getUpperDirectory from './functions/getUpperDirectory.js';
 import getDirectoryPath from './functions/getDirectoryPath.js';
@@ -10,6 +8,7 @@ import readSelectedFile from './functions/readSelectedFile.js';
 import path from 'path';
 import createFile from './functions/createFile.js';
 import renameFile from './functions/renameFile.js';
+import showMessage from './functions/showMessage.js';
 
 const userName = getUserName();
 let currentPath = os.homedir();
@@ -21,7 +20,7 @@ process.stdin.setEncoding('utf8');
 process.stdin.on('data', async (data) => {
   switch (data.trim().split(' ')[0]) {
     case '.exit':
-      sayGoodbye(userName);
+      showMessage(`Thank you for using File Manager, ${userName}, goodbye!`, 'cyan');
       process.exit();
     case 'up':
       currentPath = getUpperDirectory(currentPath);
@@ -47,12 +46,10 @@ process.stdin.on('data', async (data) => {
         await renameFile(oldPathToFile, newPathToFile);
         break;
     default:
-      console.log(`${colors.red}Invalid input${colors.reset}\n`);
+      showMessage('Invalid input', 'red');
   }
 
-  console.log(
-    `${colors.green}You are currently in ${currentPath}${colors.reset}`
-  );
+  showMessage(`You are currently in ${currentPath}`, 'green');
 });
 
 process.on('SIGINT', () => {

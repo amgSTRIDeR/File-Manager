@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import isDirectory from './isDirectory.js';
 import isFile from './isFile.js';
-import colors from '../common/colors.js';
 
 export default async function printContents(currentPath) {
   const contents = await fs.promises.readdir(currentPath);
