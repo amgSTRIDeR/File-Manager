@@ -11,6 +11,7 @@ import renameFile from './functions/renameFile.js';
 import showMessage from './functions/showMessage.js';
 import copyFile from './functions/copyFile.js';
 import sayGoodbye from './functions/sayGoodbye.js';
+import moveFile from './functions/moveFile.js';
 
 const userName = getUserName();
 let currentPath = os.homedir();
@@ -36,7 +37,7 @@ process.stdin.on('data', async (data) => {
         showMessage('Invalid input', 'red');
         break;
       }
-      
+
       currentPath = getDirectoryPath(firstArgPath, currentPath);
       break;
 
@@ -77,6 +78,14 @@ process.stdin.on('data', async (data) => {
         break;
       }
       await copyFile(firstArgPath, secondArgPath);
+      break;
+
+    case 'mv':
+      if (!firstArg || !secondArg) {
+        showMessage('Invalid input', 'red');
+        break;
+      }
+      await moveFile(firstArgPath, secondArgPath);
       break;
 
     case '.exit':

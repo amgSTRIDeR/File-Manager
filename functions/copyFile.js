@@ -1,14 +1,17 @@
 import fs from 'fs';
 import showMessage from './showMessage.js';
+import path from 'path';
 
 export default async function copyFile(fileToCopyPath, destinationPath) {
-  if (!fs.existsSync(fileToCopyPath) || fs.existsSync(destinationPath)) {
+  const destinationFilePath = path.join(destinationPath, path.basename(fileToCopyPath));
+
+  if (!fs.existsSync(fileToCopyPath) || fs.existsSync(destinationFilePath)) {
     showMessage();
     return;
   }
   
   const readStream = fs.createReadStream(fileToCopyPath);
-  const writeStream = fs.createWriteStream(destinationPath);
+  const writeStream = fs.createWriteStream(destinationFilePath);
 
   readStream.on('data', (chunk) => {
     writeStream.write(chunk);
