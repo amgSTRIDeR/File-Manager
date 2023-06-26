@@ -1,20 +1,26 @@
 import getUserName from './functions/getUserName.js';
 import greetUser from './functions/greetUser.js';
 import sayGoodbye from './functions/sayGoodbye.js';
+import os from 'os';
 
 const userName = getUserName();
+let currentPath = os.homedir();
 
-greetUser(userName);
+greetUser(userName, currentPath);
 
 process.stdin.setEncoding('utf8');
 
 process.stdin.on('data', (data) => {
-  if (data.trim() === '.exit') {
-    sayGoodbye(userName);
-    process.exit();
+  switch (data.trim()) {
+    case '.exit':
+      sayGoodbye(userName);
+      process.exit();
+    default:
+      console.log(`\nInvalid input`);
   }
-});
 
+  console.log(`You are currently in ${currentPath}`);
+});
 
 process.on('SIGINT', () => {
   sayGoodbye(userName);
