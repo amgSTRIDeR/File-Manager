@@ -23,6 +23,10 @@ export default async function osActions(arg) {
       showMessage(`Current username: ${os.userInfo().username}`, 'yellow');
       break;
 
+    case '--architecture':
+      showMessage(`CPU architecture: ${process.arch}`, 'yellow');
+      break;
+
     default:
       showMessage('Invalid input', 'red');
   }
