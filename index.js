@@ -1,3 +1,4 @@
+import colors from './common/colors.js';
 import getUserName from './functions/getUserName.js';
 import greetUser from './functions/greetUser.js';
 import sayGoodbye from './functions/sayGoodbye.js';
@@ -16,10 +17,10 @@ process.stdin.on('data', (data) => {
       sayGoodbye(userName);
       process.exit();
     default:
-      console.log(`\nInvalid input`);
+      console.log(`\n${colors.red}Invalid input${colors.reset}`);
   }
 
-  console.log(`You are currently in ${currentPath}`);
+  console.log(`${colors.cyan}You are currently in ${currentPath}${colors.reset}`);
 });
 
 process.on('SIGINT', () => {
