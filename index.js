@@ -12,6 +12,7 @@ import showMessage from './functions/showMessage.js';
 import copyFile from './functions/copyFile.js';
 import sayGoodbye from './functions/sayGoodbye.js';
 import moveFile from './functions/moveFile.js';
+import deleteFile from './functions/deleteFile.js';
 
 const userName = getUserName();
 let currentPath = os.homedir();
@@ -87,6 +88,14 @@ process.stdin.on('data', async (data) => {
       }
       await moveFile(firstArgPath, secondArgPath);
       break;
+
+      case 'rm':
+        if (!firstArg) {
+          showMessage('Invalid input', 'red');
+          break;
+        }
+        await deleteFile(firstArgPath);
+        break;
 
     case '.exit':
       sayGoodbye(userName);
