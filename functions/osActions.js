@@ -19,6 +19,10 @@ export default async function osActions(arg) {
       showMessage(`Home directory: ${os.homedir()}`, 'yellow');
       break;
 
+    case '--username':
+      showMessage(`Current username: ${os.userInfo().username}`, 'yellow');
+      break;
+
     default:
       showMessage('Invalid input', 'red');
   }
