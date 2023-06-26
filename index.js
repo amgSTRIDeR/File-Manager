@@ -23,7 +23,7 @@ process.stdin.on('data', async (data) => {
       currentPath = getUpperDirectory(currentPath);
       break;
     case 'cd':
-      const dirPath = data.slice(3).trim() || '';
+      const dirPath = data.substring(3).trim() || '';
       currentPath = getDirectoryPath(dirPath, currentPath);
       break;
     case 'ls':
