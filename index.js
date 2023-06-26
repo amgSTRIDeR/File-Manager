@@ -8,6 +8,7 @@ import getDirectoryPath from './functions/getDirectoryPath.js';
 import printContents from './functions/printContents.js';
 import readSelectedFile from './functions/readSelectedFile.js';
 import path from 'path';
+import createFile from './functions/createFile.js';
 
 const userName = getUserName();
 let currentPath = os.homedir();
@@ -32,7 +33,12 @@ process.stdin.on('data', async (data) => {
       await printContents(currentPath);
       break;
     case 'cat':
-      await readSelectedFile(path.join(currentPath, data.substring(4)).trim());
+      const fileToReadPath = path.join(currentPath, data.substring(4)).trim();
+      await readSelectedFile(fileToReadPath);
+      break;
+    case 'add':
+      const fileToCreatePath = path.join(currentPath, data.substring(4)).trim();
+      await createFile(fileToCreatePath);
       break;
     default:
       console.log(`${colors.red}Invalid input${colors.reset}\n`);
