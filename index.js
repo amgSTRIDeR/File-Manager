@@ -14,6 +14,7 @@ import sayGoodbye from './functions/sayGoodbye.js';
 import moveFile from './functions/moveFile.js';
 import deleteFile from './functions/deleteFile.js';
 import osActions from './functions/osActions.js';
+import getHash from './functions/getHash.js';
 
 const userName = getUserName();
 let currentPath = os.homedir();
@@ -104,6 +105,14 @@ process.stdin.on('data', async (data) => {
         break;
       }
       await osActions(firstArg);
+      break;
+
+    case 'hash':
+      if (!firstArg) {
+        showMessage('Invalid input', 'red');
+        break;
+      }
+      await getHash(firstArgPath);
       break;
 
     case '.exit':
