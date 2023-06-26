@@ -9,6 +9,8 @@ import path from 'path';
 import createFile from './functions/createFile.js';
 import renameFile from './functions/renameFile.js';
 import showMessage from './functions/showMessage.js';
+import copyFile from './functions/copyFile.js';
+import sayGoodbye from './functions/sayGoodbye.js';
 
 const userName = getUserName();
 let currentPath = os.homedir();
@@ -18,34 +20,69 @@ greetUser(userName, currentPath);
 process.stdin.setEncoding('utf8');
 
 process.stdin.on('data', async (data) => {
-  switch (data.trim().split(' ')[0]) {
-    case '.exit':
-      showMessage(`Thank you for using File Manager, ${userName}, goodbye!`, 'cyan');
-      process.exit();
+  const command = data.trim().split(' ')[0].trim();
+  const firstArg = data.trim().split(' ')[1]?.trim() || '';
+  const secondArg = data.trim().split(' ')[2]?.trim() || '';
+  const firstArgPath = path.resolve(currentPath, firstArg).trim() || '';
+  const secondArgPath = path.resolve(currentPath, secondArg).trim() || '';
+
+  switch (command) {
     case 'up':
       currentPath = getUpperDirectory(currentPath);
       break;
+
     case 'cd':
-      const dirPath = data.substring(3).trim() || '';
-      currentPath = getDirectoryPath(dirPath, currentPath);
+      if (!firstArg) {
+        showMessage('Invalid input', 'red');
+        break;
+      }
+      
+      currentPath = getDirectoryPath(firstArgPath, currentPath);
       break;
+
     case 'ls':
       await printContents(currentPath);
       break;
+
     case 'cat':
-      const fileToReadPath = path.join(currentPath, data.substring(4)).trim();
-      await readSelectedFile(fileToReadPath);
-      break;
-    case 'add':
-      const fileToCreatePath = path.join(currentPath, data.substring(4)).trim();
-      await createFile(fileToCreatePath);
-      break;
-      case 'rn':
-        const args = data.substring(3).split(' ');
-        const oldPathToFile = path.join(currentPath, args[0]).trim();
-        const newPathToFile = path.join(currentPath, args[1]).trim();
-        await renameFile(oldPathToFile, newPathToFile);
+      if (!firstArg) {
+        showMessage('Invalid input', 'red');
         break;
+      }
+
+      await readSelectedFile(firstArgPath);
+      break;
+
+    case 'add':
+      if (!firstArg) {
+        showMessage('Invalid input', 'red');
+        break;
+      }
+
+      await createFile(firstArgPath);
+      break;
+
+    case 'rn':
+      if (!firstArg || !secondArg) {
+        showMessage('Invalid input', 'red');
+        break;
+      }
+
+      await renameFile(firstArgPath, secondArgPath);
+      break;
+
+    case 'cp':
+      if (!firstArg || !secondArg) {
+        showMessage('Invalid input', 'red');
+        break;
+      }
+      await copyFile(firstArgPath, secondArgPath);
+      break;
+
+    case '.exit':
+      sayGoodbye(userName);
+      process.exit();
+
     default:
       showMessage('Invalid input', 'red');
   }
