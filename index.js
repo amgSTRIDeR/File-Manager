@@ -5,6 +5,7 @@ import sayGoodbye from './functions/sayGoodbye.js';
 import os from 'os';
 import getUpperDirectory from './functions/getUpperDirectory.js';
 import getDirectoryPath from './functions/getDirectoryPath.js';
+import printContents from './functions/printContents.js';
 
 const userName = getUserName();
 let currentPath = os.homedir();
@@ -13,7 +14,7 @@ greetUser(userName, currentPath);
 
 process.stdin.setEncoding('utf8');
 
-process.stdin.on('data', (data) => {
+process.stdin.on('data', async (data) => {
   switch (data.trim().split(' ')[0]) {
     case '.exit':
       sayGoodbye(userName);
@@ -22,8 +23,11 @@ process.stdin.on('data', (data) => {
       currentPath = getUpperDirectory(currentPath);
       break;
     case 'cd':
-      const dirPath = data.split(' ')[1].trim() || '';
+      const dirPath = data.slice(3).trim() || '';
       currentPath = getDirectoryPath(dirPath, currentPath);
+      break;
+    case 'ls':
+      await printContents(currentPath);
       break;
     default:
       console.log(`${colors.red}Invalid input${colors.reset}\n`);

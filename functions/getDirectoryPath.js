@@ -1,18 +1,10 @@
 import path from 'path';
 import fs from 'fs';
 import colors from '../common/colors.js';
-
-function isDirectory(pathToCheck) {
-  const stats = fs.statSync(pathToCheck);
-
-  if (stats.isDirectory()) {
-    return true;
-  }
-
-  return false;
-}
+import isDirectory from './isDirectory.js';
 
 export default function getDirectoryPath(dirPath, currentPath) {
+  console.log(dirPath)
   const relativePath = path.join(currentPath, dirPath);
 
   if (fs.existsSync(dirPath) && isDirectory(dirPath)) {
