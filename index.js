@@ -9,6 +9,7 @@ import printContents from './functions/printContents.js';
 import readSelectedFile from './functions/readSelectedFile.js';
 import path from 'path';
 import createFile from './functions/createFile.js';
+import renameFile from './functions/renameFile.js';
 
 const userName = getUserName();
 let currentPath = os.homedir();
@@ -40,6 +41,11 @@ process.stdin.on('data', async (data) => {
       const fileToCreatePath = path.join(currentPath, data.substring(4)).trim();
       await createFile(fileToCreatePath);
       break;
+      case 'rn':
+        const oldPathToFile = path.join(currentPath, data.substring(3).split(' ')[0]).trim();
+        const newPathToFile = path.join(currentPath, data.substring(3).split(' ')[1]).trim();
+        await renameFile(oldPathToFile, newPathToFile);
+        break;
     default:
       console.log(`${colors.red}Invalid input${colors.reset}\n`);
   }
