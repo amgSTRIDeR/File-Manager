@@ -41,8 +41,9 @@ process.stdin.on('data', async (data) => {
       await createFile(fileToCreatePath);
       break;
       case 'rn':
-        const oldPathToFile = path.join(currentPath, data.substring(3).split(' ')[0]).trim();
-        const newPathToFile = path.join(currentPath, data.substring(3).split(' ')[1]).trim();
+        const args = data.substring(3).split(' ');
+        const oldPathToFile = path.join(currentPath, args[0]).trim();
+        const newPathToFile = path.join(currentPath, args[1]).trim();
         await renameFile(oldPathToFile, newPathToFile);
         break;
     default:
