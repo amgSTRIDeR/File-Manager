@@ -15,6 +15,10 @@ export default async function osActions(arg) {
       getCpusInfo();
       break;
 
+    case '--homedir':
+      showMessage(`Home directory: ${os.homedir()}`, 'yellow');
+      break;
+
     default:
       showMessage('Invalid input', 'red');
   }
