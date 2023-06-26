@@ -6,6 +6,8 @@ import os from 'os';
 import getUpperDirectory from './functions/getUpperDirectory.js';
 import getDirectoryPath from './functions/getDirectoryPath.js';
 import printContents from './functions/printContents.js';
+import readSelectedFile from './functions/readSelectedFile.js';
+import path from 'path';
 
 const userName = getUserName();
 let currentPath = os.homedir();
@@ -28,6 +30,9 @@ process.stdin.on('data', async (data) => {
       break;
     case 'ls':
       await printContents(currentPath);
+      break;
+    case 'cat':
+      await readSelectedFile(path.join(currentPath, data.substring(4)).trim());
       break;
     default:
       console.log(`${colors.red}Invalid input${colors.reset}\n`);
