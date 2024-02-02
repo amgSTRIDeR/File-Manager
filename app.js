@@ -1,9 +1,12 @@
 import { stdin } from "process"
+import os from "os";
 import getUsername from "./utils/getUsername.js";
+import greetUser from "./utils/greetUser.js";
 
 const username = getUsername();
-console.log(`Welcome to the File Manager, ${username}!`)
+let currentDirectory = os.homedir();
+
+greetUser(username, currentDirectory);
 
 stdin.on('data', (data) => {
-    console.log(data)
     })
