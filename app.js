@@ -1,12 +1,11 @@
 import { stdin } from "process"
 import os from "os";
-import getUsername from "./utils/getUsername.js";
-import greetUser from "./utils/greetUser.js";
+import * as utils from "./_imports.js";
 
-const username = getUsername();
+const username = utils.getUsername();
 let currentDirectory = os.homedir();
 
-greetUser(username, currentDirectory);
+utils.greetUser(username, currentDirectory);
 
 stdin.on('data', (data) => {
     })
