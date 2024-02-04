@@ -71,6 +71,11 @@ stdin.on('data', async (data) => {
                 utils.printInConsole('Invalid input', 'red');
             }
             break;
+        case ('hash'):
+            if (isTargetPathExist(targetPath)) {
+                await utils.calculateHash(currentDirectory, targetPath);
+            }
+            break;
 
         case ('.exit'):
             utils.sayGoodbye(username);
