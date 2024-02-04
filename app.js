@@ -37,6 +37,11 @@ stdin.on('data', async (data) => {
                 await utils.showFileContent(currentDirectory, targetPath);
             }
             break;
+        case ('add'):
+            if (isTargetPathExist(targetPath)) {
+                await utils.createFile(currentDirectory, targetPath);
+            }
+            break;
         case ('.exit'):
             utils.sayGoodbye(username);
             process.exit();
