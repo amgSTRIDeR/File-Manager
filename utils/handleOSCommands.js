@@ -20,7 +20,11 @@ export default function handleOSCommands(arg) {
             break;
         case 'username':
             const username = os.userInfo().username;
-            printInConsole(`The username is: ${username}`, 'yellow');
+            printInConsole(`The current system username is: ${username}`, 'yellow');
+            break;
+        case 'architecture':
+            const architecture = os.arch();
+            printInConsole(`The architecture is: ${architecture}`, 'yellow');
             break;
         default:
             printInConsole('Invalid input', 'red');
