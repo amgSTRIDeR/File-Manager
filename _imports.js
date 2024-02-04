@@ -5,5 +5,6 @@ import getDirectoryPath from "./utils/getDirectoryPath.js";
 import showList from "./utils/showList.js";
 import showFileContent from "./utils/showFileContent.js";
 import createFile from "./utils/createFile.js";
+import renameFile from "./utils/renameFile.js";
 
-export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath, getUpperDirectory, getDirectoryPath, showList, showFileContent, createFile }
+export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath, getUpperDirectory, getDirectoryPath, showList, showFileContent, createFile, renameFile }

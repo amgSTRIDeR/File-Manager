@@ -42,6 +42,12 @@ stdin.on('data', async (data) => {
                 await utils.createFile(currentDirectory, targetPath);
             }
             break;
+        case ('rn'):
+            if (isTargetPathExist(targetPath)) {
+                await utils.renameFile(currentDirectory, preparedData[1], preparedData[2]);
+            }
+            break;
+
         case ('.exit'):
             utils.sayGoodbye(username);
             process.exit();
