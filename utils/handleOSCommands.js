@@ -8,7 +8,12 @@ export default function handleOSCommands(arg) {
             const eol = os.EOL;
             printInConsole(`The end of a line in the current OS is: ${JSON.stringify(eol)}`, 'yellow');
             break;
-
+        case 'cpus':
+            const cpus = os.cpus();
+            printInConsole(`The number of CPUs is: ${cpus.length}`, 'yellow');
+            printInConsole(`The model of the CPU is: ${cpus[0].model}`, 'yellow');
+            printInConsole(`The clock rate of the CPU is: ${(cpus[0].speed/1000).toFixed(2)} GHz`, 'yellow');
+            break;
         default:
             printInConsole('Invalid input', 'red');
     }
