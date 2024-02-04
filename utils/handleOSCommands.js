@@ -18,6 +18,10 @@ export default function handleOSCommands(arg) {
             const homedir = os.homedir();
             printInConsole(`The home directory is: ${homedir}`, 'yellow');
             break;
+        case 'username':
+            const username = os.userInfo().username;
+            printInConsole(`The username is: ${username}`, 'yellow');
+            break;
         default:
             printInConsole('Invalid input', 'red');
     }
