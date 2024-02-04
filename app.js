@@ -7,7 +7,6 @@ let currentDirectory = os.homedir();
 utils.greetUser(username, currentDirectory);
 
 stdin.on('data', (data) => {
-    utils.showCurrentPath(currentDirectory);
     const preparedData = data.toString().trim();
 
     switch (preparedData) {
@@ -15,8 +14,12 @@ stdin.on('data', (data) => {
             utils.sayGoodbye(username);
             process.exit();
             break;
+        default:
+            utils.printInConsole('Invalid input', 'red');
+            break;
     }
 
+    utils.showCurrentPath(currentDirectory);
 })
 
 process.on('SIGINT', () => {
