@@ -19,14 +19,13 @@ utils.greetUser(username, currentDirectory);
 stdin.on('data', async (data) => {
     const preparedData = data.toString().trim().split(' ');
     const targetPath = preparedData.slice(1).join(' ');
-    const targetPathIsExist = isTargetPathExist(targetPath);
 
     switch (preparedData[0]) {
         case ('up'):
             currentDirectory = utils.getUpperDirectory(currentDirectory);
             break;
         case ('cd'):
-            if (targetPathIsExist) {
+            if (isTargetPathExist(targetPath)) {
                 currentDirectory = await utils.getDirectoryPath(currentDirectory, targetPath);
             }
             break;
@@ -34,7 +33,7 @@ stdin.on('data', async (data) => {
             await utils.showList(currentDirectory);
             break;
         case ('cat'):
-            if (targetPathIsExist) {
+            if (isTargetPathExist(targetPath)) {
                 await utils.showFileContent(currentDirectory, targetPath);
             }
             break;
