@@ -54,7 +54,13 @@ stdin.on('data', async (data) => {
                 utils.printInConsole('Invalid input', 'red');
             }
             break;
-
+        case ('mv'):
+            if (preparedData[1] && preparedData[2]) {
+                await utils.copyFile(preparedData[1], preparedData[2], { deleteSource: true});
+            } else {
+                utils.printInConsole('Invalid input', 'red');
+            }
+            break;
 
         case ('.exit'):
             utils.sayGoodbye(username);
