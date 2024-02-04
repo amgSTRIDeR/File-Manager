@@ -14,13 +14,16 @@ stdin.on('data', async (data) => {
         case ('up'):
             currentDirectory = utils.getUpperDirectory(currentDirectory);
             break;
-            case('cd'):
+        case ('cd'):
             const targetPath = preparedData[1];
             if (targetPath === undefined) {
                 utils.printInConsole('Invalid input', 'red');
                 break;
             }
             currentDirectory = await utils.getDirectoryPath(currentDirectory, targetPath);
+            break;
+        case ('ls'):
+            await utils.showList(currentDirectory);
             break;
         case ('.exit'):
             utils.sayGoodbye(username);
