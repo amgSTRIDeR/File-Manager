@@ -47,6 +47,14 @@ stdin.on('data', async (data) => {
                 await utils.renameFile(currentDirectory, preparedData[1], preparedData[2]);
             }
             break;
+        case ('cp'):
+            if (preparedData[1] && preparedData[2]) {
+                await utils.copyFile(preparedData[1], preparedData[2]);
+            } else {
+                utils.printInConsole('Invalid input', 'red');
+            }
+            break;
+
 
         case ('.exit'):
             utils.sayGoodbye(username);
