@@ -13,9 +13,6 @@ function isTarget(target) {
 const username = utils.getUsername();
 let currentDirectory = os.homedir();
 
-// for development purposes
-currentDirectory = 'D:\\nodejs-sandbox';
-
 utils.greetUser(username, currentDirectory);
 
 stdin.on('data', async (data) => {
