@@ -12,8 +12,6 @@ function isTargetPathExist(targetPath) {
 
 const username = utils.getUsername();
 let currentDirectory = os.homedir();
-//develop
-currentDirectory = 'd:/nodejs-sandbox';
 utils.greetUser(username, currentDirectory);
 
 stdin.on('data', async (data) => {
