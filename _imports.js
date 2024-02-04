@@ -11,5 +11,6 @@ import removeFile from "./utils/removeFile.js";
 import handleOSCommands from "./utils/handleOSCommands.js";
 import calculateHash from "./utils/calculateHash.js";
 import compressFile from "./utils/compressFile.js";
+import decompressFile from "./utils/decompressFile.js";
 
-export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath, getUpperDirectory, getDirectoryPath, showList, showFileContent, createFile, renameFile, copyFile, removeFile, handleOSCommands, calculateHash, compressFile }
+export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath, getUpperDirectory, getDirectoryPath, showList, showFileContent, createFile, renameFile, copyFile, removeFile, handleOSCommands, calculateHash, compressFile, decompressFile }

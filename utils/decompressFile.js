@@ -6,7 +6,7 @@ import isFile from './isFile.js';
 import isDirectory from './isDirectory.js';
 
 
-export default async function compressFile(currentDirectory, inputFilePath, destinationPath) {
+export default async function decompressFile(currentDirectory, inputFilePath, destinationPath) {
     try {
         let resolvedPathToFile = path.resolve(currentDirectory, inputFilePath);
         if (await isFile(inputFilePath)) {
@@ -18,7 +18,7 @@ export default async function compressFile(currentDirectory, inputFilePath, dest
             resolvedDestinationPath = destinationPath;
         }
 
-        const resolvedDestinationFile = path.resolve(resolvedDestinationPath, path.basename(resolvedPathToFile) + '.br');
+        const resolvedDestinationFile = path.resolve(resolvedDestinationPath, path.basename(resolvedPathToFile).slice(0, -3));
 
         if (await isFile(resolvedDestinationFile)) {
             printInConsole();
@@ -33,7 +33,7 @@ export default async function compressFile(currentDirectory, inputFilePath, dest
         const readStream = fs.createReadStream(resolvedPathToFile);
         const writeStream = fs.createWriteStream(resolvedDestinationFile);
 
-        const brotliStream = zlib.createBrotliCompress();
+        const brotliStream = zlib.createBrotliDecompress();
 
         readStream.pipe(brotliStream).pipe(writeStream);
 
@@ -43,17 +43,15 @@ export default async function compressFile(currentDirectory, inputFilePath, dest
                 resolve();
             });
 
-            writeStream.on('error', (error) => {
-                reject(error);
-            }
-            );
-        }
-        );
+            writeStream.on('error', () => {
+                reject();
+            });
+        });
 
         await fileCompressed;
-        printInConsole(`File ${resolvedPathToFile} compressed to ${resolvedDestinationFile}`, 'yellow');
+        printInConsole(`File ${resolvedPathToFile} decompressed to ${resolvedDestinationFile}`, 'yellow');
 
-    } catch (error) {
+    } catch {
         printInConsole();
     }
 }

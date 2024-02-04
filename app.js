@@ -87,6 +87,13 @@ stdin.on('data', async (data) => {
                 utils.printInConsole('Invalid input', 'red');
             }
             break;
+        case ('decompress'):
+            if (preparedData[1] && preparedData[2]) {
+                await utils.decompressFile(currentDirectory, preparedData[1], preparedData[2]);
+            } else {
+                utils.printInConsole('Invalid input', 'red');
+            }
+            break;
         case ('.exit'):
             utils.sayGoodbye(username);
             process.exit();
