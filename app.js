@@ -7,4 +7,17 @@ let currentDirectory = os.homedir();
 utils.greetUser(username, currentDirectory);
 
 stdin.on('data', (data) => {
-    })
+    const preparedData = data.toString().trim();
+
+    switch (preparedData) {
+        case ('.exit'):
+            utils.sayGoodbye(username);
+            process.exit();
+            break;
+    }
+
+})
+process.on('SIGINT', () => {
+    utils.sayGoodbye(username);
+    process.exit();
+});
