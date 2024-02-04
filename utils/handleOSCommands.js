@@ -14,6 +14,10 @@ export default function handleOSCommands(arg) {
             printInConsole(`The model of the CPU is: ${cpus[0].model}`, 'yellow');
             printInConsole(`The clock rate of the CPU is: ${(cpus[0].speed/1000).toFixed(2)} GHz`, 'yellow');
             break;
+        case 'homedir':
+            const homedir = os.homedir();
+            printInConsole(`The home directory is: ${homedir}`, 'yellow');
+            break;
         default:
             printInConsole('Invalid input', 'red');
     }
