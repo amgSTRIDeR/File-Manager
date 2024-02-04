@@ -1,6 +1,5 @@
 import getUsername from "./utils/getUsername.js";
-// import greetUser from "./utils/greetUser.js";
-// import printInConsole from "./utils/printInConsole.js";
 import { greetUser, printInConsole, sayGoodbye, showCurrentPath } from "./utils/console-messages.js";
+import getUpperDirectory from "./utils/getUpperDirectory.js";
 
-export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath }
+export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath, getUpperDirectory }

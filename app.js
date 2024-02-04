@@ -10,13 +10,14 @@ stdin.on('data', (data) => {
     const preparedData = data.toString().trim();
 
     switch (preparedData) {
+        case ('up'):
+            currentDirectory = utils.getUpperDirectory(currentDirectory);
+            break;
         case ('.exit'):
             utils.sayGoodbye(username);
             process.exit();
-            break;
         default:
             utils.printInConsole('Invalid input', 'red');
-            break;
     }
 
     utils.showCurrentPath(currentDirectory);
