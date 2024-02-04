@@ -7,5 +7,6 @@ import showFileContent from "./utils/showFileContent.js";
 import createFile from "./utils/createFile.js";
 import renameFile from "./utils/renameFile.js";
 import copyFile from "./utils/copyFile.js";
+import removeFile from "./utils/removeFile.js";
 
-export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath, getUpperDirectory, getDirectoryPath, showList, showFileContent, createFile, renameFile, copyFile }
+export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath, getUpperDirectory, getDirectoryPath, showList, showFileContent, createFile, renameFile, copyFile, removeFile }

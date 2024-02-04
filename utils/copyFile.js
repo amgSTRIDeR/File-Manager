@@ -26,11 +26,7 @@ export default async function copyFile(filePath, directoryPath, options = {delet
 
         readStream.on('end', () => {
             if (options.deleteSource) {
-                fs.unlink(normalizedFilePath, (err) => {
-                    if (err) {
-                        printInConsole();
-                    }
-                });
+                fs.promises.unlink(normalizedFilePath);
             }
             printInConsole(`File ${parsedFilePath.base} copied to ${directoryPath}`, 'yellow');
         })

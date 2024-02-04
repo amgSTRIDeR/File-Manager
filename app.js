@@ -61,6 +61,11 @@ stdin.on('data', async (data) => {
                 utils.printInConsole('Invalid input', 'red');
             }
             break;
+            case('rm'): 
+            if (isTargetPathExist(targetPath)) {
+                await utils.removeFile(currentDirectory, targetPath);
+            }
+            break;
 
         case ('.exit'):
             utils.sayGoodbye(username);
