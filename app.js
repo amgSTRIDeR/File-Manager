@@ -2,8 +2,8 @@ import { stdin } from "process"
 import os from "os";
 import * as utils from "./_imports.js";
 
-function isTargetPathExist(targetPath) {
-    if (!targetPath) {
+function isTarget(target) {
+    if (!target) {
         utils.printInConsole('Invalid input', 'red');
         return false;
     }
@@ -12,36 +12,40 @@ function isTargetPathExist(targetPath) {
 
 const username = utils.getUsername();
 let currentDirectory = os.homedir();
+
+// for development purposes
+currentDirectory = 'D:\\nodejs-sandbox';
+
 utils.greetUser(username, currentDirectory);
 
 stdin.on('data', async (data) => {
     const preparedData = data.toString().trim().split(' ');
-    const targetPath = preparedData.slice(1).join(' ');
+    const target = preparedData.slice(1).join(' ');
 
     switch (preparedData[0]) {
         case ('up'):
             currentDirectory = utils.getUpperDirectory(currentDirectory);
             break;
         case ('cd'):
-            if (isTargetPathExist(targetPath)) {
-                currentDirectory = await utils.getDirectoryPath(currentDirectory, targetPath);
+            if (isTarget(target)) {
+                currentDirectory = await utils.getDirectoryPath(currentDirectory, target);
             }
             break;
         case ('ls'):
             await utils.showList(currentDirectory);
             break;
         case ('cat'):
-            if (isTargetPathExist(targetPath)) {
-                await utils.showFileContent(currentDirectory, targetPath);
+            if (isTarget(target)) {
+                await utils.showFileContent(currentDirectory, target);
             }
             break;
         case ('add'):
-            if (isTargetPathExist(targetPath)) {
-                await utils.createFile(currentDirectory, targetPath);
+            if (isTarget(target)) {
+                await utils.createFile(currentDirectory, target);
             }
             break;
         case ('rn'):
-            if (isTargetPathExist(targetPath)) {
+            if (isTarget(target)) {
                 await utils.renameFile(currentDirectory, preparedData[1], preparedData[2]);
             }
             break;
@@ -60,8 +64,8 @@ stdin.on('data', async (data) => {
             }
             break;
         case ('rm'):
-            if (isTargetPathExist(targetPath)) {
-                await utils.removeFile(currentDirectory, targetPath);
+            if (isTarget(target)) {
+                await utils.removeFile(currentDirectory, target);
             }
             break;
         case ('os'):
@@ -72,11 +76,17 @@ stdin.on('data', async (data) => {
             }
             break;
         case ('hash'):
-            if (isTargetPathExist(targetPath)) {
-                await utils.calculateHash(currentDirectory, targetPath);
+            if (isTarget(target)) {
+                await utils.calculateHash(currentDirectory, target);
             }
             break;
-
+        case ('compress'):
+            if (preparedData[1] && preparedData[2]) {
+                await utils.compressFile(currentDirectory, preparedData[1], preparedData[2]);
+            } else {
+                utils.printInConsole('Invalid input', 'red');
+            }
+            break;
         case ('.exit'):
             utils.sayGoodbye(username);
             process.exit();
