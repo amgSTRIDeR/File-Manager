@@ -8,5 +8,6 @@ import createFile from "./utils/createFile.js";
 import renameFile from "./utils/renameFile.js";
 import copyFile from "./utils/copyFile.js";
 import removeFile from "./utils/removeFile.js";
+import handleOSCommands from "./utils/handleOSCommands.js";
 
-export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath, getUpperDirectory, getDirectoryPath, showList, showFileContent, createFile, renameFile, copyFile, removeFile }
+export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath, getUpperDirectory, getDirectoryPath, showList, showFileContent, createFile, renameFile, copyFile, removeFile, handleOSCommands }

@@ -56,14 +56,21 @@ stdin.on('data', async (data) => {
             break;
         case ('mv'):
             if (preparedData[1] && preparedData[2]) {
-                await utils.copyFile(currentDirectory, preparedData[1], preparedData[2], { deleteSource: true});
+                await utils.copyFile(currentDirectory, preparedData[1], preparedData[2], { deleteSource: true });
             } else {
                 utils.printInConsole('Invalid input', 'red');
             }
             break;
-            case('rm'): 
+        case ('rm'):
             if (isTargetPathExist(targetPath)) {
                 await utils.removeFile(currentDirectory, targetPath);
+            }
+            break;
+        case ('os'):
+            if (preparedData[1] && preparedData[1].startsWith('--')) {
+                utils.handleOSCommands(preparedData[1]);
+            } else {
+                utils.printInConsole('Invalid input', 'red');
             }
             break;
 
