@@ -15,7 +15,7 @@ stdin.on('data', async (data) => {
             currentDirectory = utils.getUpperDirectory(currentDirectory);
             break;
         case ('cd'):
-            const targetPath = preparedData[1];
+            const targetPath = preparedData.slice(1).join(' ');
             if (targetPath === undefined) {
                 utils.printInConsole('Invalid input', 'red');
                 break;
