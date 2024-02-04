@@ -9,8 +9,6 @@ export default async function removeFile(currentDirectory, pathToFile) {
         resolvedPathToFile = pathToFile;
     }
 
-    console.log(resolvedPathToFile);
-
     try {
         await fs.promises.unlink(resolvedPathToFile);
         printInConsole(`File ${pathToFile} removed`, 'yellow');
