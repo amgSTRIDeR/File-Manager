@@ -3,5 +3,6 @@ import { greetUser, printInConsole, sayGoodbye, showCurrentPath } from "./utils/
 import getUpperDirectory from "./utils/getUpperDirectory.js";
 import getDirectoryPath from "./utils/getDirectoryPath.js";
 import showList from "./utils/showList.js";
+import showFileContent from "./utils/showFileContent.js";
 
-export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath, getUpperDirectory, getDirectoryPath, showList }
+export { getUsername, greetUser, printInConsole, sayGoodbye, showCurrentPath, getUpperDirectory, getDirectoryPath, showList, showFileContent }
