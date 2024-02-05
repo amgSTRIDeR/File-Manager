@@ -8,6 +8,7 @@ function greetUser(username, currentPath) {
     printInConsole(`Welcome to the File Manager, ${username}!`, 'cyan');
     printInConsole(`(For exit use 'ctrl + c' or type '.exit')`, 'magenta');
     showCurrentPath(currentPath);
+    proposeToTypeCommand(username);
 }
 
 function showCurrentPath(currentPath) {
@@ -18,4 +19,8 @@ function sayGoodbye(username) {
     printInConsole(`Thank you for using File Manager, ${username}, goodbye!`, 'cyan');
 }
 
-export { greetUser, printInConsole, sayGoodbye, showCurrentPath };
+function proposeToTypeCommand(username) {
+    printInConsole(`${username}, please type a command:`, 'yellow');
+}
+
+export { greetUser, printInConsole, sayGoodbye, showCurrentPath, proposeToTypeCommand };

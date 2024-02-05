@@ -99,6 +99,7 @@ stdin.on('data', async (data) => {
     }
 
     utils.showCurrentPath(currentDirectory);
+    utils.proposeToTypeCommand(username);
 })
 
 process.on('SIGINT', () => {
