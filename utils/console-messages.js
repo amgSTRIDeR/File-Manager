@@ -20,7 +20,7 @@ function sayGoodbye(username) {
 }
 
 function proposeToTypeCommand(username) {
-    printInConsole(`${username}, please type a command:`, 'yellow');
+    printInConsole(`${username}, please type a command:`, 'gray');
 }
 
 export { greetUser, printInConsole, sayGoodbye, showCurrentPath, proposeToTypeCommand };
