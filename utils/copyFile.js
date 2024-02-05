@@ -12,12 +12,17 @@ export default async function copyFile(currentDirectory, pathToFile, destination
             resolvedPathToFile = normalizedFilePath;
         }
 
+
         const normalizedDirectoryPath = path.normalize(destinationDirectory);
+        let resolvedPathToDirectory = path.resolve(currentDirectory, normalizedDirectoryPath);
+        if (await isDirectory(normalizedDirectoryPath)) {
+            resolvedPathToDirectory = normalizedDirectoryPath;
+        }
         const parsedFilePath = path.parse(resolvedPathToFile);
-        const destinationFilePath = path.resolve(normalizedDirectoryPath, parsedFilePath.base);
+        const destinationFilePath = path.resolve(resolvedPathToDirectory, parsedFilePath.base);
 
         const isOriginalFileExist = await isFile(resolvedPathToFile);
-        const isDirectoryExist = await isDirectory(normalizedDirectoryPath);
+        const isDirectoryExist = await isDirectory(resolvedPathToDirectory);
         const isDestinationFileExist = await isFile(destinationFilePath);
         if (!isOriginalFileExist || !isDirectoryExist || isDestinationFileExist) {
             printInConsole();
@@ -37,7 +42,7 @@ export default async function copyFile(currentDirectory, pathToFile, destination
         if (options.deleteSource) {
             fs.promises.unlink(resolvedPathToFile);
         }
-        printInConsole(`File ${parsedFilePath.base} copied to ${destinationDirectory}`, 'yellow');
+        printInConsole(`File ${resolvedPathToFile} copied to ${resolvedPathToDirectory}`, 'yellow');
     } catch {
         printInConsole();
     }
