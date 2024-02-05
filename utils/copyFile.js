@@ -4,7 +4,7 @@ import { printInConsole } from './console-messages.js';
 import fs from 'fs';
 import isDirectory from "./isDirectory.js";
 
-export default async function copyFile(currentDirectory, pathToFile, destinationDirectory, options = {deleteSource: false}) {
+export default async function copyFile(currentDirectory, pathToFile, destinationDirectory, options = { deleteSource: false }) {
     try {
         const normalizedFilePath = path.normalize(pathToFile);
         let resolvedPathToFile = path.resolve(currentDirectory, normalizedFilePath);
@@ -26,15 +26,18 @@ export default async function copyFile(currentDirectory, pathToFile, destination
 
         const readStream = fs.createReadStream(resolvedPathToFile);
         const writeStream = fs.createWriteStream(destinationFilePath);
-
         readStream.pipe(writeStream);
+        const copyPromise = new Promise((resolve, reject) => {
+            readStream.on('end', () => {
+                resolve();
+            })
+        });
 
-        readStream.on('end', () => {
-            if (options.deleteSource) {
-                fs.promises.unlink(resolvedPathToFile);
-            }
-            printInConsole(`File ${parsedFilePath.base} copied to ${destinationDirectory}`, 'yellow');
-        })
+        await copyPromise;
+        if (options.deleteSource) {
+            fs.promises.unlink(resolvedPathToFile);
+        }
+        printInConsole(`File ${parsedFilePath.base} copied to ${destinationDirectory}`, 'yellow');
     } catch {
         printInConsole();
     }
